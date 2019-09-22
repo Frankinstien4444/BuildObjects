@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,7 +9,10 @@ using BuildObjects.Enums;
 
 namespace BuildObjects.MapObjects
 {
-    [Serializable]
+    /// <summary>
+    /// This object is the physical map for all properties, fields and methods
+    /// </summary>
+    [Serializable]    
     public class MapedObject
     {
         [DataMember]
@@ -26,11 +29,13 @@ namespace BuildObjects.MapObjects
             FieldMaps = new List<FieldColumnMap>();            
             MethodParameters = new List<MethodParameterMap>();
         }    
-    }
+    }   
 
     [Serializable]
     public class MethodParameterMap
     {
+        [DataMember]
+        public Guid ID { private set; get; }
         [DataMember]
         public String MethodName { set; get; }
         [DataMember]
@@ -44,6 +49,7 @@ namespace BuildObjects.MapObjects
         {
             ColumnParameterMaps = new List<ParameterColumnMap>();
             ParameterMaps = new List<ParameterMap>();
+            ID = Guid.NewGuid();
         }
     }
 
@@ -100,6 +106,8 @@ namespace BuildObjects.MapObjects
     [Serializable]
     public class DataStore
     {
+        [DataMember]
+        public Guid MethodID { set; get; }
         [DataMember]
         public String DataStoreName { set; get; }
         [DataMember]
